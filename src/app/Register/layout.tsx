@@ -1,4 +1,4 @@
-export default function RegisterLayout({ children }) {
+export default function RegisterLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       {children}
