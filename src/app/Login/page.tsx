@@ -18,8 +18,12 @@ export default function LoginPage() {
       const result = await loginUser(email, password)
       console.log(email, password)
       console.log('Login riuscito:', result)
-    } catch (err: any) {
-      setError(err.message || 'Errore durante il login')
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message || 'Errore durante il login')
+      } else {
+        setError('Errore sconosciuto durante il login')
+      }
     } finally {
       setLoading(false)
     }
