@@ -28,7 +28,7 @@ export default function RegisterPage() {
         setError('')
 
         try {
-            const result = await registerUser(email, password, first_name, last_name, family_member, tax_code)
+            await registerUser(email, password, first_name, last_name, family_member, tax_code)
             setModalOpen(true);
         } catch (err) {
             if (err instanceof Error) {
