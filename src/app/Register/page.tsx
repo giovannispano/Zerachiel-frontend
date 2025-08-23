@@ -22,27 +22,23 @@ export default function RegisterPage() {
 
 
 
-    const handleLogin = async (e: React.FormEvent) => {
+    const handle = async (e: React.FormEvent) => {
         e.preventDefault()
         setLoading(true)
         setError('')
 
         try {
-            await registerUser(email, password, first_name, last_name, family_member, tax_code)
-            setModalOpen(true);
-        } catch (err) {
-            if (err instanceof Error) {
-                setError(err.message || 'Errore durante la registrazione')
-            } else {
-                setError('Errore sconosciuto durante la registrazione')
-            }
+            const result = await registerUser(email, password, first_name, last_name, family_member, tax_code)
+            if (!result.success) {
+                setError(result.error);
+            } else { setModalOpen(true); }
         } finally {
             setLoading(false)
         }
     }
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-            <form onSubmit={handleLogin} className="bg-white p-6 rounded shadow-md w-80">
+            <form onSubmit={handle} className="bg-white p-6 rounded shadow-md w-80">
                 <h1 className="text-2xl mb-4 text-center font-bold">Register</h1>
 
                 {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
@@ -55,7 +51,7 @@ export default function RegisterPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <div className="relative w-full mb-4">
+                <div className="relative w-full">
                     <input
                         type={showPassword ? "text" : "password"}
                         placeholder="Password"
@@ -64,7 +60,7 @@ export default function RegisterPage() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                         minLength={8}
-                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.~])[A-Za-z\d@$!%*?&.~]{8,}$"
                         title="La password deve avere almeno 8 caratteri, includere una maiuscola, una minuscola, un numero e un simbolo."
                     />
                     <button
@@ -131,5 +127,4 @@ export default function RegisterPage() {
             )}
         </div>
     );
-
 }
