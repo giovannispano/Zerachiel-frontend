@@ -26,7 +26,6 @@ export default function RegisterPage() {
         e.preventDefault()
         setLoading(true)
         setError('')
-
         try {
             const result = await registerUser(email, password, first_name, last_name, family_member, tax_code)
             if (!result.success) {
@@ -37,12 +36,12 @@ export default function RegisterPage() {
         }
     }
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 ">
             <form onSubmit={handle} className="bg-white p-6 rounded shadow-md w-80">
                 <h1 className="text-2xl mb-4 text-center font-bold">Register</h1>
 
                 {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-
                 <input
                     type="email"
                     placeholder="Email"
