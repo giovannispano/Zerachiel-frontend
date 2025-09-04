@@ -2,11 +2,8 @@
 
 import axios from 'axios'
 import { cookies } from 'next/headers'
-const db_URL = process.env.DB_URL;
-const stop = process.env.STOP;
-
 export async function loginUser(email: string, password: string) {
-  const response = await axios.post(`${db_URL}/auth/login`, {
+  const response = await axios.post('https://zerachiel-backend.vercel.app/auth/login', {
     email,
     password,
   });
@@ -32,7 +29,7 @@ export async function registerUser(email: string, password: string, first_name?:
     if (res.data.some(v => v.name.includes(`${stop}`))) {
       throw new Error("Registrazioni attualmente chiuse.")
     };
-    const response = await axios.post(`${db_URL}/auth/register`, {
+    const response = await axios.post(`https://zerachiel-backend.vercel.app/auth/register`, {
       email,
       password,
       first_name,
