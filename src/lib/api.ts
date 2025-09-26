@@ -1,20 +1,30 @@
-'use server'
+"use server";
 
 import axios from 'axios'
 import { cookies } from 'next/headers'
-export async function loginUser(email: string, password: string) {
-  const response = await axios.post('https://zerachiel-backend.vercel.app/auth/login', {
-    email,
-    password,
-  });
+import { jwtDecode } from "jwt-decode";
 
-  (await cookies()).set('token', response.data.access_token, {
+type JwtPayload = { sub: number }; // solo id
+
+
+export async function loginUser(email: string, password: string) {
+  const response = await axios.post(
+    "https://zerachiel-backend.vercel.app/auth/login",
+    {
+      email,
+      password,
+    }
+  );
+
+  const token = response.data.access_token;
+
+  (await cookies()).set("token", token, {
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
-    path: '/',
-    maxAge: 60 * 60 * 24 * 7, // 1 settimana
-  })
+    sameSite: "strict",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 7,
+  });
 
   return response.data
 }
@@ -48,4 +58,12 @@ export async function registerUser(email: string, password: string, first_name?:
     };
     return { success: false, error: "Errore sconosciuto" };
   }
+}
+
+export async function fetchMorti() {
+  const response = await axios.get(
+    "https://zerachiel-backend.vercel.app/deceased"
+  );
+  console.log(response.data);
+  return response.data;
 }
