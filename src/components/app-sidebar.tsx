@@ -1,4 +1,8 @@
+"use client";
+
 import { Home, Inbox, Church } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 import {
   Sidebar,
@@ -12,7 +16,6 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 
-// Menu items.
 const items = [
   {
     title: "Home",
@@ -29,19 +32,14 @@ const items = [
     url: "/Dashboard/GestioneCimiteriale",
     icon: Church,
   },
-  //   {
-  //     title: "Search",
-  //     url: "#",
-  //     icon: Search,
-  //   },
-  //   {
-  //     title: "Settings",
-  //     url: "#",
-  //     icon: Settings,
-  //   },
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname() ?? "/";
+
+  const normalize = (p: string) => p.replace(/\/+$/, "") || "/";
+  const isActive = (url: string) => normalize(pathname) === normalize(url);
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -49,16 +47,30 @@ export function AppSidebar() {
           <SidebarGroupLabel>Zerachiel</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url} className="flex items-center gap-2">
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {items.map((item) => {
+                const active = isActive(item.url);
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <Link
+                        href={item.url}
+                        aria-current={active ? "page" : undefined}
+                        className={cn(
+                          "flex items-center gap-2 px-3 py-2 rounded-md transition-colors",
+                          active
+                            ? "bg-sky-100 text-sky-700 font-semibold"
+                            : "text-muted-foreground hover:bg-slate-50"
+                        )}
+                      >
+                        <item.icon
+                          className={cn(active ? "text-sky-600" : "")}
+                        />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
