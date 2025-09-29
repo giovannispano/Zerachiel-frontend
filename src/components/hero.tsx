@@ -18,7 +18,7 @@ const Hero = () => {
             Zerachiel
           </h1>
           <p className="mt-6 max-w-[60ch] sm:text-lg">
-            L’app ZERACHIEL nasce per offrire ai cittadini uno strumento
+            L&apos;app ZERACHIEL nasce per offrire ai cittadini uno strumento
             digitale intuitivo per trovare e raggiungere facilmente le tombe dei
             propri cari all'interno del cimitero comunale di Trapani. Grazie a
             una mappa interattiva e un sistema di navigazione intelligente, i
