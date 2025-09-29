@@ -20,11 +20,11 @@ const Hero = () => {
           <p className="mt-6 max-w-[60ch] sm:text-lg">
             L&apos;app ZERACHIEL nasce per offrire ai cittadini uno strumento
             digitale intuitivo per trovare e raggiungere facilmente le tombe dei
-            propri cari all'interno del cimitero comunale di Trapani. Grazie a
-            una mappa interattiva e un sistema di navigazione intelligente, i
-            visitatori potranno individuare rapidamente la posizione esatta
-            della tomba e ricevere indicazioni per raggiungerla senza
-            difficoltà.
+            propri cari all&apos;interno del cimitero comunale di Trapani.
+            Grazie a una mappa interattiva e un sistema di navigazione
+            intelligente, i visitatori potranno individuare rapidamente la
+            posizione esatta della tomba e ricevere indicazioni per raggiungerla
+            senza difficoltà.
           </p>
           <div className="mt-12 flex items-center gap-4">
             <Button size="lg" className="rounded-full text-base">
