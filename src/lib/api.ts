@@ -55,10 +55,6 @@ export async function registerUser(
   const randomNumber = Math.floor(Math.random() * 1000000);
   tax_code = tax_code?.trim() || randomNumber.toString();
   try {
-    const res = await axios.get<{ name: string }[]>(`${stop}`);
-    if (res.data.some((v) => v.name.includes(`${stop}`))) {
-      throw new Error("Registrazioni attualmente chiuse.");
-    }
     const response = await axios.post(
       `https://zerachiel-backend.vercel.app/auth/register`,
       {
