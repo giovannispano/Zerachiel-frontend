@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
-import Link from "next/link";
+//import Link from "next/link";
 import React from "react";
 
 const Hero = () => {
@@ -18,7 +18,7 @@ const Hero = () => {
             Zerachiel
           </h1>
           <p className="mt-6 max-w-[60ch] sm:text-lg">
-            L'app ZERACHIEL nasce per offrire ai cittadini uno strumento
+            L’app ZERACHIEL nasce per offrire ai cittadini uno strumento
             digitale intuitivo per trovare e raggiungere facilmente le tombe dei
             propri cari all'interno del cimitero comunale di Trapani. Grazie a
             una mappa interattiva e un sistema di navigazione intelligente, i
