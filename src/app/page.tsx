@@ -1,4 +1,3 @@
-import Link from "next/link";
 import LoginPage from "./Login/page";
 
 export default function Home() {
