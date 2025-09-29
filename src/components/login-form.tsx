@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { loginUser } from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function LoginForm({
   className,
@@ -24,7 +25,7 @@ export function LoginForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError(error);
 
     try {
       const result = await loginUser(email, password);
@@ -89,9 +90,9 @@ export function LoginForm({
               </Button>
               <div className="text-center text-sm">
                 Non hai un account?{" "}
-                <a href="#" className="underline underline-offset-4">
+                <Link href="/Register" className="underline underline-offset-4">
                   Registrati
-                </a>
+                </Link>
               </div>
             </div>
           </form>
@@ -106,7 +107,7 @@ export function LoginForm({
       </Card>
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
         Cliccando su continua, accetti i nostri
-        <a href="#">Termini di servizio</a> e
+        <a href="#">Termini di servizio</a> e{" "}
         <a href="#">Politica sulla privacy</a>.
       </div>
     </div>

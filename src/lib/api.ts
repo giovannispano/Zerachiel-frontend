@@ -4,7 +4,7 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
 
-type JwtPayload = { sub: number }; // solo id
+type JwtPayload = { sub: number };
 
 export async function loginUser(email: string, password: string) {
   const response = await axios.post(
