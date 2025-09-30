@@ -21,6 +21,8 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<'form
     const [familyMember, setFamilyMember] = useState(false)
     const [taxCode, setTaxCode] = useState('')
     const [error, setError] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
     const [loading, setLoading] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
@@ -29,9 +31,11 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<'form
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
+        setEmailError('')
+        setPasswordError('')
 
         if (password !== confirmPassword) {
-            setError('Le password non corrispondono')
+            setPasswordError('Le password non corrispondono')
             return
         }
 
@@ -46,7 +50,11 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<'form
                 taxCode
             )
             if (!result.success) {
-                setError(result.error)
+                if (result.error === 'Email già registrata') {
+                    setEmailError(result.error)
+                } else {
+                    setError(result.error)
+                }
             } else {
                 setModalOpen(true)
             }
@@ -71,7 +79,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<'form
                         <p className="text-muted-foreground text-sm">
                             Compila i campi per registrarti
                         </p>
-                        {error && <p className="text-center text-sm text-red-500">{error}</p>}
+                        {error && <h1 className="text-center text-sm text-red-500">{error}</h1>}
                     </div>
 
                     <div className="flex gap-4">
@@ -98,7 +106,11 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<'form
 
                     <div className="grid gap-2">
                         <Label htmlFor="email">Email</Label>
-                        <Input
+                        {emailError && (
+                            <h2 className="text-center text-lg font-bold text-red-500">
+                                {emailError}
+                            </h2>
+                        )}                        <Input
                             id="email"
                             type="email"
                             placeholder="nome@email.com"
@@ -110,6 +122,11 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<'form
 
                     <div className="grid gap-2">
                         <Label htmlFor="password">Password</Label>
+                        {passwordError && (
+                            <h2 className="text-center text-lg font-bold text-red-500">
+                                {passwordError}
+                            </h2>
+                        )}
                         <div className="relative">
                             <Input
                                 id="password"
@@ -154,8 +171,9 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<'form
                             </button>
                         </div>
                     </div>
+
                     <p className="text-sm text-muted-foreground">
-                        Cliccando su continua, accetti i nostri{' '}
+                        Cliccando su Registrati, accetti i nostri{' '}
                         <a href="#" className="underline hover:text-foreground">Termini di servizio</a> e{' '}
                         <a href="#" className="underline hover:text-foreground">Politica sulla privacy</a>.
                     </p>
@@ -184,7 +202,6 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<'form
                         </div>
                     )}
                 </form>
-
 
                 <div className="hidden md:flex md:w-1/2">
                     <Image

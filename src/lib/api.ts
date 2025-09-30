@@ -45,13 +45,11 @@ export async function loginUser(email: string, password: string) {
 export async function registerUser(
   email: string,
   password: string,
-  first_name?: string,
-  last_name?: string,
+  first_name: string,
+  last_name: string,
   family_member?: boolean,
   tax_code?: string
 ) {
-  first_name = first_name?.trim() || " ";
-  last_name = last_name?.trim() || " ";
   const randomNumber = Math.floor(Math.random() * 1000000);
   tax_code = tax_code?.trim() || randomNumber.toString();
   try {
