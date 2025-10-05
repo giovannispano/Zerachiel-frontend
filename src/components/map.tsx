@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 export default function Map() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<any | null>(null);
+  const mapRef = useRef<LeafletMap | null>(null);
   const roRef = useRef<ResizeObserver | null>(null);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Map() {
     if (mapRef.current) return;
 
     let mounted = true;
-    let createdMarkers: any[] = [];
+    let createdMarkers: LeafletMarker[] = [];
 
     (async () => {
       const LeafletModule = await import("leaflet");
