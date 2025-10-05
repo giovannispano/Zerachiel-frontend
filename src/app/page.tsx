@@ -9,8 +9,5 @@ export default function Home() {
       <Hero />
       <Footer />
     </>
-    // <div className="flex flex-col items-center justify-center min-h-screen gap-4 bg-gray-100">
-    //   <LoginPage />
-    // </div>
   );
 }

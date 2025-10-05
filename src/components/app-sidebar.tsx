@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Inbox, Church } from "lucide-react";
+import { Home, Inbox, Church, Map } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
@@ -31,6 +31,11 @@ const items = [
     title: "Gestione Cimiteriale",
     url: "/Dashboard/GestioneCimiteriale",
     icon: Church,
+  },
+  {
+    title: "Mappa",
+    url: "/Dashboard/Mappa",
+    icon: Map,
   },
 ];
 
